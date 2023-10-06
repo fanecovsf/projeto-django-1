@@ -12,23 +12,12 @@ from app_cad_resid.services import ResidenteServices
 from app_cad_resid.serializers import EnderecoSerializer
 from app_cad_resid.serializers import ResidenteSerializer
 
-class EnderecoAPI(APIView):
+from projeto_cad_resid.abstract import AbstractAPIView
 
-    def get(self,request):
-        enderecos=EnderecoServices.query_all()
-        serializer=EnderecoSerializer(enderecos,many=True)
+class EnderecoAPI(AbstractAPIView):
+    model_serializer=EnderecoSerializer
+    model_service=EnderecoServices
 
-        return Response(serializer.data,status=status.HTTP_200_OK)
-    
-    def post(self,request):
-        data=request.data
-        serializer=EnderecoSerializer(data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         
 class EnderecoDetailsAPI(APIView):
     
@@ -65,22 +54,9 @@ class EnderecoDetailsAPI(APIView):
             return Response(data={'Erro':'Endereco nao existe'},status=status.HTTP_404_NOT_FOUND)
     
 
-class ResidenteAPI(APIView):
-
-    def get(self,request):
-        residente=ResidenteServices.query_all()
-        serializer=ResidenteSerializer(residente,many=True)
-        return Response(serializer.data,status=status.HTTP_200_OK)
-    
-    def post(self,request):
-        data=request.data
-        serializer=ResidenteSerializer(data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+class ResidenteAPI(AbstractAPIView):
+    model_serializer=ResidenteSerializer
+    model_service=ResidenteServices
         
 
 class ResidenteDetailsAPI(APIView):
