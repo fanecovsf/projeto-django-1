@@ -3,7 +3,7 @@ from app_cad_resid.models import Residente
 
 from rest_framework import serializers
 
-class ResidenteSerializer(serializers.ModelSerializer):
+class EnderecoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Endereco

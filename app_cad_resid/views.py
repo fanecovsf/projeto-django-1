@@ -9,20 +9,20 @@ from rest_framework import status
 from app_cad_resid.services import EnderecoServices
 from app_cad_resid.services import ResidenteServices
 
-from app_cad_resid.serializers import ResidenteSerializer
+from app_cad_resid.serializers import EnderecoSerializer
 from app_cad_resid.serializers import ResidenteSerializer
 
 class EnderecoAPI(APIView):
 
     def get(self,request):
         enderecos=EnderecoServices.query_all()
-        serializer=ResidenteSerializer(enderecos,many=True)
+        serializer=EnderecoSerializer(enderecos,many=True)
 
         return Response(serializer.data,status=status.HTTP_200_OK)
     
     def post(self,request):
         data=request.data
-        serializer=ResidenteSerializer(data=data)
+        serializer=EnderecoSerializer(data=data)
 
         if serializer.is_valid():
             serializer.save()
@@ -36,7 +36,7 @@ class EnderecoDetailsAPI(APIView):
         endereco=EnderecoServices.get(id_endereco)
 
         if endereco:
-            serializer=ResidenteSerializer(endereco)
+            serializer=EnderecoSerializer(endereco)
             return Response(serializer.data,status=status.HTTP_200_OK)
         else:
             return Response(data={'erro':'Endereco nao existe'},status=status.HTTP_404_NOT_FOUND)
@@ -55,7 +55,7 @@ class EnderecoDetailsAPI(APIView):
         endereco=EnderecoServices.get(id_endereco)
 
         if endereco:
-            serializer=ResidenteSerializer(instance=endereco,data=data)
+            serializer=EnderecoSerializer(instance=endereco,data=data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data,status=status.HTTP_200_OK)
