@@ -32,8 +32,8 @@ class EnderecoAPI(APIView):
         
 class EnderecoDetailsAPI(APIView):
     
-    def get(self,request,id_endereco):
-        endereco=EnderecoServices.get(id_endereco)
+    def get(self,request,id):
+        endereco=EnderecoServices.get(id)
 
         if endereco:
             serializer=EnderecoSerializer(endereco)
@@ -41,8 +41,8 @@ class EnderecoDetailsAPI(APIView):
         else:
             return Response(data={'erro':'Endereco nao existe'},status=status.HTTP_404_NOT_FOUND)
         
-    def delete(self,request,id_endereco):
-        endereco=EnderecoServices.get(id_endereco)
+    def delete(self,request,id):
+        endereco=EnderecoServices.get(id)
 
         if endereco:
             endereco.delete()
@@ -50,9 +50,9 @@ class EnderecoDetailsAPI(APIView):
         else:
             return Response(data={'Erro':'Endereco nao existe'},status=status.HTTP_404_NOT_FOUND)
     
-    def put(self,request,id_endereco):
+    def put(self,request,id):
         data=request.data
-        endereco=EnderecoServices.get(id_endereco)
+        endereco=EnderecoServices.get(id)
 
         if endereco:
             serializer=EnderecoSerializer(instance=endereco,data=data)
@@ -85,8 +85,8 @@ class ResidenteAPI(APIView):
 
 class ResidenteDetailsAPI(APIView):
     
-    def get(self,request,id_residente):
-        residente=ResidenteServices.get(id_residente)
+    def get(self,request,id):
+        residente=ResidenteServices.get(id)
 
         if residente:
             serializer=ResidenteSerializer(residente)
@@ -94,8 +94,8 @@ class ResidenteDetailsAPI(APIView):
         else:
             return Response(data={'erro':'Residente nao existe'},status=status.HTTP_404_NOT_FOUND)
         
-    def delete(self,request,id_residente):
-        residente=ResidenteServices.get(id_residente)
+    def delete(self,request,id):
+        residente=ResidenteServices.get(id)
 
         if residente:
             residente.delete()
@@ -103,9 +103,9 @@ class ResidenteDetailsAPI(APIView):
         else:
             return Response(data={'Erro':'Residente nao existe'},status=status.HTTP_404_NOT_FOUND)
         
-    def put(self,request,id_residente):
+    def put(self,request,id):
         data=request.data
-        residente=ResidenteServices.get(id_residente)
+        residente=ResidenteServices.get(id)
 
         if residente:
             serializer=ResidenteSerializer(instance=residente,data=data)
